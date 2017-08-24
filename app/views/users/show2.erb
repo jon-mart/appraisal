@@ -1,0 +1,33 @@
+
+<table>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>salary</th>
+    <th>contact</th>
+    <th>role</th>
+  </tr>
+
+
+<% if @user.role == 'm' %>
+  <%  @user.engineers.each do |f| %>
+  <h1> List of Engineers </h1>
+<% elsif @user.role == 'sm' %>
+  <% @user.managers.each do |f| %>
+  <h1> List of Managers </h1>
+<% else %>
+  <% @user do |f| %>
+<% end %>
+
+
+
+
+    <tr>
+      <td><%= link_to 'Show', user_path(f) %></td>
+      <td><%= f.name %></td>
+      <td><%= f.salary %></td>
+      <td><%= f.contact %></td>
+      <td><%= f.role %></td>
+    </tr>
+  <% end %>
+</table>

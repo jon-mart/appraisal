@@ -1,0 +1,35 @@
+
+<% if @user.role == 'm'%>
+  
+  <h1> List of Engineers </h1>
+  <%= render :partial => 'layouts/me', locals: { person: @user.engineers }%>
+<% elsif @user.role == 'sm' %>
+
+  <h1> List of Managers </h1>
+  <%= render :partial => 'layouts/me', locals: { person: @user.managers }%>
+<% elsif @user.role == 'e' %>
+ <table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th>Name</th>
+    <th>salary</th>
+    <th>contact</th>
+    <th>role</th>
+  </tr>
+ 
+    <tr>
+      <td><%= link_to 'Show', user_path(@user) %></td>
+      <td><%= @user.name %></td>
+      <td><%= @user.salary %></td>
+      <td><%= @user.contact %></td>
+      <td><%= @user.contact %></td>
+      <td><%= @user.role %></td>
+    </tr>
+  
+</table>
+
+<% end %>
+
+
+

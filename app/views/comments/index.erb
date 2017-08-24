@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <th>Goal-Name</th>
+    <th>Comments </th>
+  </tr>
+ 
+  <% @comments.each do |f| %>
+    <tr>
+
+      <td><%= f.goal.name %></td>
+      <td><%= f.comments_words %></td>
+
+    </tr>
+  <% end %>
+</table>

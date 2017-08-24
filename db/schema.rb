@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823102811) do
+ActiveRecord::Schema.define(version: 20170824044738) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "goal_id"
     t.string "comments_words"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
     t.integer "super_manager_id"
     t.integer "manager_id"
+    t.integer "users_id"
     t.index ["goal_id"], name: "index_comments_on_goal_id"
     t.index ["manager_id"], name: "index_comments_on_manager_id"
     t.index ["super_manager_id"], name: "index_comments_on_super_manager_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["users_id"], name: "index_comments_on_users_id"
   end
 
   create_table "goals", force: :cascade do |t|
@@ -40,15 +40,13 @@ ActiveRecord::Schema.define(version: 20170823102811) do
     t.string "name"
     t.integer "salary"
     t.string "contact"
-    t.string "role" 
+    t.string "role"
+    t.integer "manager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "manager_id"
     t.integer "super_manager_id"
     t.index ["manager_id"], name: "index_users_on_manager_id"
     t.index ["super_manager_id"], name: "index_users_on_super_manager_id"
-    t.index ["user_id"], name: "index_users_on_user_id"
   end
 
 end

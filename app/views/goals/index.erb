@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <th> </th>
+    <th>User</th>
+    <th>Name</th>
+    <th>Details</th>
+    <th>Status</th>
+  </tr>
+ 
+  <% @goals.each do |f| %>
+
+    <tr>
+      <td><%= link_to 'Edit', edit_user_path(f) %></td>
+      <td><%= f.user.name %></td>
+      <td><%= f.name %></td>
+      <td><%= f.details %></td>
+      <td><%= f.status %></td>
+      
+      <td>
+         <% if not f.comments.empty? %>
+          <%= link_to 'comments', goal_comments_path(f)%>
+         <% else %>
+           No Comments..
+         <% end %>
+      </td>
+
+    </tr>
+  <% end %>
+</table>
