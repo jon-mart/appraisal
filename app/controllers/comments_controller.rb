@@ -1,24 +1,15 @@
 class CommentsController < ApplicationController
 	def index
-		@goals = Goal.find(params[:goal_id])
-	    @comments = @goals.comments.all
-	end
-
-	def show
-		@goal = Goal.find(params[:goal_id])
-	end
-
-	def new
-		@goal = Goal.new
-	end
-
-	def edit
-		@goal = Goal.find(params[:goal_id])
+		@user = User.find(params[:user_id])
+		@goal = @user.goals.find(params[:goal_id])
+	    @comments = @goal.comments.all
 	end
 
 	def create
-		@goal = Goal.new(base_params)
-		if @goal.save
+		@user = User.find(params[:user_id])
+		@goal = @user.goals.find(params[:goal_id])
+		@comment = @goal.comments.new(base_params)
+		if @comment.save
 			redirect_to root_path
 		else
 			render 'new'
@@ -26,23 +17,19 @@ class CommentsController < ApplicationController
 	end
 
 	def update
-		@goal = Goal.find(params[:goal_id])
 
-		if @goal.update(base_params)
-			redirect_to root_path
-		else
-			render 'edit'
-		end
 	end
 
 	def destroy
-		@goal = Goal.find(params[:goal_id])
+		@user = User.find(params[:user_id])
+		@goal = @user.goals.find(params[:goal_id])
+		@comments = @goal.comments.find(params[:id])
+		@comments.destroy
 		redirect_to root_path
 	end
 
-
 	private
 	def base_params
-		return params.require(:goal).permit()
+		return params.require(:comment).permit(:goal_id, :comments_word, :super_manager_id, :manager_id)
 	end
 end

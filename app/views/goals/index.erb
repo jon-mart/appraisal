@@ -1,16 +1,27 @@
-<table>
+
+<h1 style="text-align: center;">Goals</h1>
+
+
+
+<% content_for :goal do %>
+  <li><%= link_to 'Create Goals',  new_user_goal_path   %></li>
+<% end %>
+
+<table class='table'>
   <tr>
-    <th> </th>
+    
     <th>User</th>
     <th>Name</th>
     <th>Details</th>
     <th>Status</th>
+    <th>Comments</th>
+    <th> </th>
+    <th> </th>
+    <th> </th>
   </tr>
  
   <% @goals.each do |f| %>
-
     <tr>
-      <td><%= link_to 'Edit', edit_user_path(f) %></td>
       <td><%= f.user.name %></td>
       <td><%= f.name %></td>
       <td><%= f.details %></td>
@@ -18,12 +29,15 @@
       
       <td>
          <% if not f.comments.empty? %>
-          <%= link_to 'comments', goal_comments_path(f)%>
+          <%= link_to 'comments', user_goal_path( user_id: params[:user_id],:id=> f )%> 
+          <kbd><%= f.comments.count %></kbd>
          <% else %>
-           No Comments..
+           <%= link_to 'Add comment', user_goal_path(user_id: params[:user_id],:id => f)%>  
          <% end %>
       </td>
-
+      <td><%= link_to 'Edit', edit_user_goal_path(user_id: params[:user_id],:id=> f) %></td>
+      <td><%= link_to 'Show', user_goal_path(user_id: params[:user_id], :id=> f) %></td>
+      <td><%= link_to 'Delete', user_goal_path(user_id: params[:user_id], :id=> f), method: :delete, data: {confirm: "Delete the goal"} %></td>
     </tr>
   <% end %>
 </table>

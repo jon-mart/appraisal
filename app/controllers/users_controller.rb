@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
-
+	
 	def index
 		@users = User.all
-		
 	end
 
 	def show
 		@user = User.find(params[:id])
+		@@users_id = @user
 	end
 
 	def new
@@ -38,9 +38,25 @@ class UsersController < ApplicationController
 
 	def destroy
 		@user = User.find(params[:id])
+		# p @user
+		# binding.pry
+
+		@user.destroy
+
+
 		redirect_to root_path
 	end
 
+	def managers
+		@user = User.where(role: 'm')
+		render json: @user
+	end
+
+
+	def users_list
+		@users = User.all
+		render json: @users
+	end
 
 	private
 	def base_params

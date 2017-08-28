@@ -1,8 +1,12 @@
-<%= form_for(@goals) do |f|%>
+<% content_for :goal do %>
+  <li><%= link_to 'Create Goals', new_goal_path   %></li>
+<% end %>
+
+<%= form_for(@goal) do |f|%>
   <%= f.label :name %>
  <%= f.text_field :name %>
  <%= f.label :details %>
- <%= f.text_area :defails %>
+ <%= f.text_area :details %>
   <%= f.label :status %>
  <%= f.text_field :status %>
   <%= f.submit %>

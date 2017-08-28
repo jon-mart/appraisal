@@ -1,9 +1,9 @@
 class Goal < ApplicationRecord
-
+    validates :name, uniqueness: true
 	before_save :before_save_goal#, message: "Super Manager don't need goal"
 
 	belongs_to :user
-	has_many :comments
+	has_many :comments, dependent: :destroy
 
 	delegate :current_user_role, to: :user
 

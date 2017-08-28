@@ -1,0 +1,19 @@
+<div ng-controller='anAppController'> 
+<%= form_for([@user,@user.goals.build]) do |f| %>
+
+
+  <%= f.label :name %>
+  <%= f.text_field :name%>
+
+  <%= f.label :status %>
+  <%= f.text_field :status %>
+
+  <%= f.label :details %>
+  <%= f.text_area :details %>
+
+
+  
+  <%= f.submit %>
+<% end %>
+ 
+</div>

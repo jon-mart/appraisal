@@ -1,0 +1,54 @@
+<% content_for :goal do %>
+  <li><%= link_to 'Create Goals', new_user_goal_path   %></li>
+<% end %>
+
+<h1 style="text-align: center;"> Comments</h1>
+
+<table class='table'>
+  <tr>
+    
+    <th>Goal Name</th>
+    <th>Comments Words</th>
+  </tr>
+ 
+  <% @goal.comments.each do |f| %>
+    <tr>
+
+      <td><%= f.goal.name %></td>
+      <td><%= f.comments_words %></td>
+
+    </tr>
+  <% end %>
+</table>
+
+
+
+<div ng-controller='anAppController'> 
+
+<%= form_for([@goal.comments.build]) do |f| %>
+
+<%= f.label :goal_id %>
+
+        <input type="text" ng-model="goalsOfUser"  class="inputText" >  
+        <select name="comment[goal_id]">  
+            <option ng-repeat="goal in user_goals | filter:goalsOfUser" value='{{goal.id}}' >    {{goal.name}}
+            </option>  
+            <%= params[:id]%>
+
+<br>
+<%= f.label :manager_id %>
+      
+        <input type="text" ng-model="manager_list"  class="inputText" >  
+        <select name="comment[manager_id]">  
+            <option ng-repeat="manager in managers | filter:manager_list" value='{{manager.id}}' >    {{manager.name}}
+            </option>  
+
+<%= f.label :super_manager_id %>
+ <%= f.select :super_manager_id, User.where(role: 'sm').collect { |p| [ p.name, p.id ] }  %>
+<%= f.label :comments_words %>
+ <%= f.text_field :comments_words  %>
+
+  <%= f.submit %>
+<% end %>
+ 
+</div>

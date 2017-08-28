@@ -1,22 +1,35 @@
-Create New User<%= link_to ' New User', new_user_path %>
-<table>
+
+<table class='table'>
   <tr>
-    <th></th>
+    
     <th>Name</th>
     <th>salary</th>
     <th>contact</th>
     <th>role</th>
     <th>Goals</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    
   </tr>
  
   <% @users.each do |f| %>
     <tr>
-      <td><%= link_to 'Show', user_path(f) %></td>
-      <td><%= link_to 'Edit', edit_user_path(f) %></td>
+
       <td><%= f.name %></td>
       <td><%= f.salary %></td>
       <td><%= f.contact %></td>
-      <td><%= f.role %></td>
+      
+      <% case f.role %>
+       <% when 'e' %>  
+          <td>Engineer</td>
+       <% when 'm' %>  
+          <td>Manager</td>
+       <% when 'sm' %>  
+          <td>Engineer</td>
+        <% end %>
+
       <td>
          <% if not f.goals.empty? %>
           <%= link_to 'goals', user_goals_path(f)%>
@@ -24,8 +37,11 @@ Create New User<%= link_to ' New User', new_user_path %>
            No Goals..
          <% end %>
       </td>
-       
+      <td><%= link_to 'Show', user_path(f) %></td>
+      <td><%= link_to 'Edit', edit_user_path(f) %></td>
+      <td><%= link_to 'Delete', user_path(f), method: :delete, data: {confirm: "Are you sure? User is delete then no goals and comments will be aviable"}%></td>
+      <td><%= link_to 'Create Goal', new_user_goal_path(f) %></td>
+
     </tr>
   <% end %>
 </table>
-

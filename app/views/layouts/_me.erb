@@ -1,19 +1,29 @@
 
-<table>
+<table class="table">
   <tr>
-    <th></th>
+    
     <th>Name</th>
     <th>salary</th>
     <th>contact</th>
     <th>role</th>
+    <th></th> 
+    <th></th>
   </tr>
   <% person.each do |f| %>
     <tr>
-      <td><%= link_to 'Show', user_path(f) %></td>
+      
       <td><%= f.name %></td>
       <td><%= f.salary %></td>
       <td><%= f.contact %></td>
       <td><%= f.role %></td>
+      <td><%= link_to 'Show', user_path(f) %></td>
+            <td>
+         <% if not f.goals.empty? %>
+          <%= link_to 'goals', user_goals_path(f)%>
+         <% else %>
+           No Goals..
+         <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
