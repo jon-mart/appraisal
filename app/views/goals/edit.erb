@@ -1,13 +1,29 @@
 <% content_for :goal do %>
-  <li><%= link_to 'Create Goals', new_goal_path   %></li>
+  <li><%= link_to 'Create Goals', user_goal_path   %></li>
 <% end %>
 
-<%= form_for(@goal) do |f|%>
-  <%= f.label :name %>
- <%= f.text_field :name %>
+<style type="text/css">
+
+</style>
+
+<div class="app_form">
+<%= form_for ([@user, @goal])  do |f|%>
+ <div class="form-group">
+  <%= f.label :name, class: "form-label" %>
+ <%= f.text_field :name, class: "form-control" %>
+ </div>
+
+ <div class="form-group">
  <%= f.label :details %>
- <%= f.text_area :details %>
+ <%= f.text_area :details, class: "form-control" %>
+ </div>
+
+ <div class="form-group">
   <%= f.label :status %>
- <%= f.text_field :status %>
-  <%= f.submit %>
+ <%= f.text_field :status, class: "form-control" %>
+ </div>
+ <div class="form-group">
+  <%= f.submit 'Comment', class: 'btn btn-primary' %>
+  </div>
 <% end %>
+</div>

@@ -23,32 +23,37 @@
 
 
 
-<div ng-controller='anAppController'> 
+<div ng-controller='anAppController' class="app_form"> 
 
-<%= form_for([@goal.comments.build]) do |f| %>
-
+<%= form_for([@user ,@goal, @goal.comments.build]) do |f| %>
+<div class="form-group">
 <%= f.label :goal_id %>
+<input type="text" id='comment[goal_id]' value=<%= params[:id]%> class= "form-control" >  
+</div>
 
-        <input type="text" ng-model="goalsOfUser"  class="inputText" >  
-        <select name="comment[goal_id]">  
-            <option ng-repeat="goal in user_goals | filter:goalsOfUser" value='{{goal.id}}' >    {{goal.name}}
-            </option>  
-            <%= params[:id]%>
-
-<br>
+<div class="form-group">
 <%= f.label :manager_id %>
       
-        <input type="text" ng-model="manager_list"  class="inputText" >  
-        <select name="comment[manager_id]">  
+        <input type="text" ng-model="manager_list"  class= "form-control" >  
+        <select name="comment[manager_id]" class= "form-control">  
             <option ng-repeat="manager in managers | filter:manager_list" value='{{manager.id}}' >    {{manager.name}}
             </option>  
+        </select>
+</div>
 
+<div class="form-group">
 <%= f.label :super_manager_id %>
- <%= f.select :super_manager_id, User.where(role: 'sm').collect { |p| [ p.name, p.id ] }  %>
-<%= f.label :comments_words %>
- <%= f.text_field :comments_words  %>
+ <%= f.select :super_manager_id, User.where(role: 'sm').collect { |p| [ p.name, p.id ] }, class: "form-control"  %>
+</div>
 
-  <%= f.submit %>
+<div class="form-group">
+<%= f.label :comments_words %>
+ <%= f.text_field :comments_words, class: "form-control"  %>
+</div>
+
+
+  <%= f.submit 'Add comment', class: 'btn btn-primary' %>
+
 <% end %>
  
 </div>

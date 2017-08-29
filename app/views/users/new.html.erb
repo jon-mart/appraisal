@@ -1,31 +1,43 @@
-<div ng-controller='anAppController'>
+<div ng-controller='anAppController' class="app_form">
 <%= form_for(@user) do |f|%>
+<div class="form-group">
  <%= f.label :name %>
- <%= f.text_field :name %>
-  <%= f.label :salary %>
- <%= f.text_field :salary %>
-  <%= f.label :contact %>
-
-<div ng-model='ng'>
- <%= f.text_field :contact %>
+ <%= f.text_field :name, class: "form-control" %>
 </div>
 
+<div class="form-group">
+  <%= f.label :salary %>
+ <%= f.text_field :salary, class: "form-control" %>
+</div>
+
+<div class="form-group">
+  <%= f.label :contact %>
+
+  <div ng-model='ng'>
+   <%= f.text_field :contact, class: "form-control" %>
+  </div>
+</div>
+
+<div class="form-group">
 <%= f.label :role %>
 
- <select ng-model='an_role'  name="user[role]" id="user_role">
+ <select ng-model='an_role'  name="user[role]" id="user_role" class="form-control">
 <option  value="e">Engineer</option>
 <option  value="m">Manager</option>
 <option  value="sm">Super Manager</option></select>
+</div>
 
+<div class="form-group">
 <%= f.label :manager_id %>
- <%= f.select :manager_id, User.where(role: 'm').collect { |p| [ p.name, p.id ] } %>
+ <%= f.select :manager_id, User.where(role: 'm').collect { |p| [ p.name, p.id ] }, class: "form-control" %>
+</div>
 
+<div class="form-group">
 <%= f.label :super_manager_id %>
+  
  <%= f.select :super_manager_id, User.where(role: 'sm').collect { |p| [ p.name, p.id ] }  %>
- 
-  <%= f.submit %>
+</div>
+
+  <%= f.submit 'New User',  class: 'btn btn-primary' %>
 <% end %>
-<span ng-hide='notShowToSM'>
- fjdlkafdkjflk
-</span>
 </div>

@@ -19,7 +19,8 @@ class GoalsController < ApplicationController
 
 	def edit
 		@user = User.find(params[:user_id])
-		@goal = user.goals.find params[:id]
+		@goal = @user.goals.find params[:id]
+		# binding.pry
 	end
 
 	def create

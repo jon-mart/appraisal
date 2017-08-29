@@ -1,17 +1,20 @@
-<div ng-controller='anAppController'> 
+
+<div class="app_form">
 <%= form_for([@user,@user.goals.build]) do |f| %>
 
-
+  <div class="form-group">
   <%= f.label :name %>
-  <%= f.text_field :name%>
-
+  <%= f.text_field :name, class: "form-control"%>
+  </div>
+  <div class="form-group">
   <%= f.label :status %>
-  <%= f.text_field :status %>
+  <%= f.text_field :status, class: "form-control" %>
+  </div>
 
+  <div class="form-group">
   <%= f.label :details %>
-  <%= f.text_area :details %>
-
-
+  <%= f.text_area :details, class: "form-control" %>
+  </div>
   
   <%= f.submit %>
 <% end %>
