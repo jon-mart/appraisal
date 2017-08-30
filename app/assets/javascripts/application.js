@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require_tree .
 
 //= require bootstrap-sprockets
@@ -20,8 +19,9 @@ var app = angular.module('app', []);
 
 var ajax_on = app.factory('ajaxFactroy', function($http){
 	return {
-		get: function(url){
-			return $http.get(url).then(function(res){
+		get: function(url, params){
+		    if (typeof(a)==='undefined') params = {}
+			return $http.get(url, params).then(function(res){
 				return res.data
 			});
 		}
@@ -29,12 +29,26 @@ var ajax_on = app.factory('ajaxFactroy', function($http){
 });
 
 var an_app_controller = app.controller('anAppController', ['$scope', 'ajaxFactroy',function($scope, ajaxFactroy){
+   get_bulk_values = function(){
+   	 console.log($(this).value()); 
+   	 
+   	}
    ajaxFactroy.get('/managers').then(function(data){
    	$scope.managers = data;
-   });
-   ajaxFactroy.get('/user_goals_index').then(function(data){
-   	$scope.user_goals = data;
    });
 
 }]);
 
+
+
+
+function bulk_user_action(){
+	$('#check_bulk_user').change(function(){
+		if ($(this).is(':checked')){
+			$('.bulk_user_ids').prop("checked", true);
+		}
+		else{
+			$('.bulk_user_ids').prop("checked", false);
+		}
+	});
+}

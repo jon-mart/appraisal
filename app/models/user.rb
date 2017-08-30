@@ -1,6 +1,12 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
 	before_save :super_user_to_nil
+
+	mount_uploader :avatar, AvatarUploader
 
 	belongs_to :super_manager, class_name: 'User', optional: true
 	has_many :managers, class_name: 'User', foreign_key: 'super_manager_id', dependent: :nullify

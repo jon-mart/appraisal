@@ -13,16 +13,17 @@
  
   <% @goal.comments.each do |f| %>
     <tr>
-
       <td><%= f.goal.name %></td>
       <td><%= f.comments_words %></td>
+      <td> <%= link_to 'Show', user_goal_comments_path(user_id: params[:user_id], goal_id: params[:id]) %>
 
     </tr>
+
   <% end %>
 </table>
+<hr>
 
-
-
+<h1 style="text-align: center;"> Add New comment</h1>
 <div ng-controller='anAppController' class="app_form"> 
 
 <%= form_for([@user ,@goal, @goal.comments.build]) do |f| %>

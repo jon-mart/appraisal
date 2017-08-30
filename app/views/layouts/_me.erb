@@ -1,7 +1,7 @@
 
 <table class="table">
   <tr>
-    
+    <th></th>
     <th>Name</th>
     <th>salary</th>
     <th>contact</th>
@@ -11,7 +11,12 @@
   </tr>
   <% person.each do |f| %>
     <tr>
-      
+      <% if not f.avatar.file.nil? %>
+        <td><%= image_tag f.avatar, class: "img-thumbnail-sm img-thumbnail" %></td>
+       <% else%>
+        <td>No image</td>
+       <% end %>
+
       <td><%= f.name %></td>
       <td><%= f.salary %></td>
       <td><%= f.contact %></td>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828055846) do
+ActiveRecord::Schema.define(version: 20170830053503) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "goal_id"
@@ -45,7 +45,21 @@ ActiveRecord::Schema.define(version: 20170828055846) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "super_manager_id"
+    t.string "gender", default: "M"
+    t.string "avatar", default: ""
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["manager_id"], name: "index_users_on_manager_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["super_manager_id"], name: "index_users_on_super_manager_id"
   end
 

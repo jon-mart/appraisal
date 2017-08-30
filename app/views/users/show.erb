@@ -2,15 +2,16 @@
 <% if @user.role == 'm'%>
   
   <h1> List of Engineers </h1>
-  <%= render :partial => 'layouts/me', locals: { person: @user.engineers }%>
+  <%= render :partial => '/layouts/me', locals: { person: @user.engineers, avatar: @user.avatar }%>
 <% elsif @user.role == 'sm' %>
 
   <h1> List of Managers </h1>
-  <%= render :partial => 'layouts/me', locals: { person: @user.managers }%>
+  <%= render :partial => 'layouts/me', locals: { person: @user.managers, avatar: @user.avatar }%>
 <% elsif @user.role == 'e' %>
+
  <table class="table">
   <tr>
-
+    <th></th>
     <th>Name</th>
     <th>salary</th>
     <th>contact</th>
@@ -20,10 +21,15 @@
   </tr>
  
     <tr>
-      
+      <% if not @user.avatar.file.nil? %>
+        <td><%= image_tag @user.avatar, class: "img-thumbnail-sm img-thumbnail" %></td>
+       <% else%>
+        <td>No image</td>
+       <% end %>
       <td><%= @user.name %></td>
       <td><%= @user.salary %></td>
       <td><%= @user.contact %></td>
+      <td><%= @user.role %></td>
       <td><%= @user.role %></td>
       <td><%= link_to 'Show', user_path(@user) %></td>
             <td>

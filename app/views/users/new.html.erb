@@ -1,8 +1,33 @@
 <div ng-controller='anAppController' class="app_form">
 <%= form_for(@user) do |f|%>
+
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> prohibited
+        this user from being saved:
+      </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
 <div class="form-group">
  <%= f.label :name %>
  <%= f.text_field :name, class: "form-control" %>
+</div>
+
+<div class="form-group">
+<%= f.label :gender %>
+
+ <select  name="user[gender]" class="form-control" id='user_gender'>
+<option  value="m">Male</option>
+<option  value="f">Female</option>
+ </select>
 </div>
 
 <div class="form-group">
@@ -19,6 +44,11 @@
 </div>
 
 <div class="form-group">
+  <%= f.label :email %>
+   <%= f.email_field :email, class: "form-control" %>
+</div>
+
+<div class="form-group">
 <%= f.label :role %>
 
  <select ng-model='an_role'  name="user[role]" id="user_role" class="form-control">
@@ -29,7 +59,12 @@
 
 <div class="form-group">
 <%= f.label :manager_id %>
- <%= f.select :manager_id, User.where(role: 'm').collect { |p| [ p.name, p.id ] }, class: "form-control" %>
+      
+        <input type="text" ng-model="manager_list"  class= "form-control" >  
+        <select name="comment[manager_id]" class= "form-control">  
+            <option ng-repeat="manager in managers | filter:manager_list" value='{{manager.id}}' >    {{manager.name}}
+            </option>  
+        </select>
 </div>
 
 <div class="form-group">
@@ -38,6 +73,10 @@
  <%= f.select :super_manager_id, User.where(role: 'sm').collect { |p| [ p.name, p.id ] }  %>
 </div>
 
+<div class="form-group">
+    <%= f.label :image %><br>
+    <%= f.file_field :image, class: "form-control" %>
+</div>
   <%= f.submit 'New User',  class: 'btn btn-primary' %>
 <% end %>
 </div>

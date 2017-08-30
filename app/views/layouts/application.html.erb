@@ -4,12 +4,11 @@
     <title>Appraisal</title>
     <%= csrf_meta_tags %>
 <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js'></script>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application' %>
     
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" integrity="sha256-LOnFraxKlOhESwdU/dX+K0GArwymUDups0czPWLEg4E=" crossorigin="anonymous"></script>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
 
   </head>
 
@@ -33,13 +32,33 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li></li>
-        <li><%= link_to 'New user', new_user_path %></li>
-        <%= yield :goal%>
-        <%= yield :comment%>
+        <li>
+          
+        </li>
+        <%= yield :goal %>
+        <%= yield :comment %>
+        <%= yield :delete_select_user %>
+        <% if user_signed_in? %>
+           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+           <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+       <% if notice %>
+          <div class="alert alert-info  alert-dismissable fade in">
+            <%= notice %>
+          </div>
+       <% end %>
+
+       <% if alert %>
+          <div class="alert alert-danger  alert-dismissable fade in">
+            <%= alert %>
+          </div>
+       <% end %>
+
     <%= yield %>
   </body>
 </html>

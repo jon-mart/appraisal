@@ -1,11 +1,27 @@
+<% content_for :delete_select_user do %>
+  <li><%= link_to 'Delect Select Users',  destroy_select_user_path( :confirm => false), :onclick => "document.getElementById('select_user').submit();".html_safe  ,:data => {:confirm => 'Press "Cancle" to move on'}, :method => :delete%>
+
+<% end %>
+
+<script type="text/javascript">
+ $(document).read(function(){
+  $('.bulk_user_ids').prop("checked", false);
+ })
+  
+</script>
+
+<%= form_tag '/destroy_select_user' , :method => :delete, :id => 'select_user'  do %>
 
 <table class='table'>
   <tr>
-    
+    <th>
+    <input type="checkbox" id="check_bulk_user" onclick="bulk_user_action()" />
+    </th>
     <th>Name</th>
     <th>salary</th>
     <th>contact</th>
     <th>role</th>
+    <th>Under Control</th>
     <th>Goals</th>
     <th></th>
     <th></th>
@@ -16,7 +32,9 @@
  
   <% @users.each do |f| %>
     <tr>
-
+<td>
+<input type="checkbox" name="bulk_user_ids[]" class="bulk_user_ids" value=<%= f.id %> />
+</td>
       <td><%= f.name %></td>
       <td><%= f.salary %></td>
       <td><%= f.contact %></td>
@@ -24,10 +42,16 @@
       <% case f.role %>
        <% when 'e' %>  
           <td>Engineer</td>
+          <td><%= f.manager.name %>(M)</td>
        <% when 'm' %>  
           <td>Manager</td>
+          <td><%= f.super_manager.name %>(SM)</td>
        <% when 'sm' %>  
-          <td>Engineer</td>
+          <td class='fa fa-user'></td>
+          <td></td>
+        <% else %>
+          <td></td>
+          <td></td>
         <% end %>
 
       <td>
@@ -45,3 +69,5 @@
     </tr>
   <% end %>
 </table>
+<% end %>
+<div class="alert alert-danger">dsffd</div>
