@@ -1,17 +1,16 @@
 <% content_for :delete_select_user do %>
-  <li><%= link_to 'Delect Select Users',  destroy_select_user_path( :confirm => false), :onclick => "document.getElementById('select_user').submit();".html_safe  ,:data => {:confirm => 'Press "Cancle" to move on'}, :method => :delete%>
-
+  <li><%= link_to 'Delect Select Users',  destroy_select_user_path( :confirm => false), :onclick => "document.getElementById('select_user').submit();".html_safe,:method => :delete%>
 <% end %>
 
 <script type="text/javascript">
- $(document).read(function(){
+$( document ).ready(function() {
   $('.bulk_user_ids').prop("checked", false);
- })
+ });
   
 </script>
 
 <%= form_tag '/destroy_select_user' , :method => :delete, :id => 'select_user'  do %>
-
+<%= submit_tag 'Sumbit'%>
 <table class='table'>
   <tr>
     <th>
@@ -70,4 +69,3 @@
   <% end %>
 </table>
 <% end %>
-<div class="alert alert-danger">dsffd</div>

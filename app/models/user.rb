@@ -1,8 +1,7 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+	# To have a relationship between the user and member(base) model
+	# one to one model is used
+	belongs_to :member, dependent: :destroy
 
 	before_save :super_user_to_nil
 

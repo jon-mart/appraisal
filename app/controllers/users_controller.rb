@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 	layout 'application', include: :destroy_select_user
-	before_action :authenticate_user!, :except => [:managers]
+
+	before_action :authenticate_member!
 
 	protect_from_forgery prepend: true
 
@@ -53,11 +54,13 @@ class UsersController < ApplicationController
 	def destroy_select_user
 
 		  t = params[:bulk_user_ids]
-		  # binding.pry
+		  binding.pry
 		  @users = []
 
 		  if  t.nil?
+		  	# binding.pry
 		    redirect_to 'index'
+		    # p 'redirect_to index'
 		  else
 		    # if temp[:role] == 'sm'
 		    # 	render js: "confirm('Warning: deleteing Super Manager??')"
@@ -68,8 +71,10 @@ class UsersController < ApplicationController
 		    end
 		  end
 		  # binding.pry
-		  if params[:confirm] == 'true'
+		  if params[:commit] == 'Comfirm in Delecting Users'
+		  	# binding.pry
 		  	@users.destroy_all
+		  	redirect_to 'index'
 		  end
 
 
@@ -79,10 +84,6 @@ class UsersController < ApplicationController
 		@user = User.where(role: 'm')
 		render json: @user
 	end
-
-	def after_sign_up_path_for
-      redirect_to new_user_path
-    end
 
 	private
 	def base_params

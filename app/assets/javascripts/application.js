@@ -40,6 +40,11 @@ var an_app_controller = app.controller('anAppController', ['$scope', 'ajaxFactro
 }]);
 
 
+function onclick_select_user_submit() {
+      console.log('selecting user');
+      
+      $("#select_user").submit();
+}
 
 
 function bulk_user_action(){
@@ -52,3 +57,4 @@ function bulk_user_action(){
 		}
 	});
 }
+

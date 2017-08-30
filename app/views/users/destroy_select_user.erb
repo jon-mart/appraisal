@@ -1,20 +1,19 @@
 
 <% content_for :delete_select_user do %>
   <li><%= link_to 'Home', root_path %></li>
-  <li><%= link_to 'Delect Select Users', destroy_select_user_path(:confirm => true), :onclick => "document.getElementById('select_user').submit();".html_safe  ,:data => {:confirm => 'Are you sure?'}, :method => :delete%>
+  <li><%= link_to 'Delect Select Users', destroy_select_user_path(:confirm => true ) ,:class => 'select_user_submit', :method => :delete%>
   </li>
 <% end %>
 
 <script type="text/javascript">
- $(document).read(function(){
+$( document ).ready(function() {
   $('.bulk_user_ids').prop("checked", true);
- })
-  
+ });
 </script>
 
 <h1 style="text-align: center;"> Delected Users </h1>
-<%= form_tag '/destroy_select_user' , :method => :delete, :id => 'select_user'  do %>
-
+<%= form_tag '/destroy_select_user', :method => :delete, :id => 'select_user'  do %>
+<%= submit_tag 'Comfirm in Delecting Users'%>
 <table class="table">
   <tr>
     <th>

@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
     	t.string :contact
     	t.string :role
     	t.references :manager, index: true
+      t.references :member, index: true
 
       t.timestamps
     end
