@@ -5,6 +5,10 @@
   </li>
 <% end %>
 
+<% content_for :button_here do %>
+  <%= submit_tag 'Comfirm in Delecting Users', :class => "btn btn-danger"%>
+<% end %>
+
 <script type="text/javascript">
 $( document ).ready(function() {
   $('.bulk_user_ids').prop("checked", true);
@@ -14,7 +18,11 @@ $( document ).ready(function() {
 
 <h1 style="text-align: center;"> Delected Users </h1>
 <%= form_tag '/destroy_select_user', :method => :delete, :id => 'select_user'  do %>
-<%= submit_tag 'Comfirm in Delecting Users'%>
+
+<% if @users.count > 5 %>
+  <%= yield :button_here %>
+<% end %>
+
 <table class="table">
   <tr>
     <th>
@@ -55,5 +63,6 @@ $( document ).ready(function() {
     </tr>
   <% end %>
 </table>
+<%= yield :button_here %>
 <% end %>
 

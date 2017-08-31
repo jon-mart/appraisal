@@ -31,6 +31,16 @@
 </div>
 
 <div class="form-group">
+ <%= f.label 'Member Ship ID' %>
+ <%= f.text_field :, class: "form-control", :value => current_member.id, :disabled => true %>
+</div>
+
+<div class="form-group">
+ <%= f.label 'Member Ship Email ID' %>
+ <%= f.text_field :name, class: "form-control", :value => current_member.email, :disabled => true %>
+</div>
+
+<div class="form-group">
   <%= f.label :salary %>
  <%= f.text_field :salary, class: "form-control" %>
 </div>
@@ -69,7 +79,7 @@
  <%= f.select :super_manager_id, User.where(role: 'sm').collect { |p| [ p.name, p.id ] }  %>
 </div>
 
-<div class="form-group">
+<div class="form-group" style="border: 2px;">
     <%= f.label :image %><br>
     <%= f.file_field :image, class: "form-control" %>
 </div>

@@ -87,7 +87,7 @@ class UsersController < ApplicationController
 
 	private
 	def base_params
-		return params.require(:user).permit(:name, :salary, :contact,:role, :manager_id, :super_manager_id, :bulk_user_id)
+		return params.require(:user).permit(:name, :salary, :contact,:role, :manager_id, :super_manager_id, :member_id, :gender)
 	end
 
 end
