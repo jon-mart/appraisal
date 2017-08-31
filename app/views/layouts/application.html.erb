@@ -31,15 +31,7 @@
     <div class="collapse navbar-collapse" id="menu-1">
 
       <ul class="nav navbar-nav navbar-right">
-        <% if Member.find(current_member).user.nil? %>
-          <li>
-          <%= link_to 'Create Role', new_user_path %>
-          </li>
-        <% else %>
-          <li>
-          <%= link_to 'Edit User', new_user_path %>
-          </li>
-        <% end %>
+
         <li>
           
         </li>
