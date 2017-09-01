@@ -23,6 +23,10 @@ class User < ApplicationRecord
 		return self.role 
 	end
 
+	def current_user_id
+		return self.id
+	end
+
 	private
 	def super_user_to_nil
 		if current_user_role == 'e'

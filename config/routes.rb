@@ -18,7 +18,6 @@ Rails.application.routes.draw do
   # resources :comments
 
 
-
   resources :users do 
   	resources :goals  do 
   	  resources :comments

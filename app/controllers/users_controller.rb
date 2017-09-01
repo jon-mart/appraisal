@@ -6,7 +6,16 @@ class UsersController < ApplicationController
 	protect_from_forgery prepend: true
 
 	def index
-		@users = User.all
+
+		user =  User.find_by member_id: current_member.id
+		if user.role == 'e'
+			@users = [user]
+		elsif user.role == 'm'
+			@users = User.where(manager_id: user)
+		elsif user.role == 'sm'
+			@users = User.all
+		end
+		# binding.pry
 	end
 
 	def show
@@ -54,12 +63,12 @@ class UsersController < ApplicationController
 	def destroy_select_user
 
 		  t = params[:bulk_user_ids]
-		  binding.pry
+		  # binding.pry
 		  @users = []
 
-		  if  t.nil?
+		  if  t.nil? or current_member.user.role == 'e'
 		  	# binding.pry
-		    redirect_to 'index'
+		    redirect_to root_path
 		    # p 'redirect_to index'
 		  else
 		    # if temp[:role] == 'sm'
@@ -71,10 +80,11 @@ class UsersController < ApplicationController
 		    end
 		  end
 		  # binding.pry
-		  if params[:commit] == 'Comfirm in Delecting Users'
+		  if params[:commit] == 'Comfirm'
 		  	# binding.pry
 		  	@users.destroy_all
-		  	redirect_to 'index'
+		  	# render js: 'alert("Selected user has been deleted");'
+		  	redirect_to root_path
 		  end
 
 
@@ -87,6 +97,7 @@ class UsersController < ApplicationController
 
 	private
 	def base_params
+		# binding.pry
 		return params.require(:user).permit(:name, :salary, :contact,:role, :manager_id, :super_manager_id, :member_id, :gender)
 	end
 

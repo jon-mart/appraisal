@@ -35,6 +35,7 @@ var an_app_controller = app.controller('anAppController', ['$scope', 'ajaxFactro
    	}
    ajaxFactroy.get('/managers').then(function(data){
    	$scope.managers = data;
+   	console.log('connecting to the server to get managers');
    });
 
 }]);

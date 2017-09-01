@@ -32,14 +32,19 @@
 
       <ul class="nav navbar-nav navbar-right">
 
-        <li>
-          
-        </li>
-        <%= yield :goal %>
-        <%= yield :comment %>
-        <%= yield :delete_select_user %>
         <% if member_signed_in? %>
            <li><%= link_to 'Sign Out', destroy_member_session_path %></li>
+           <% if Member.find(current_member.id).user.nil? %>
+              <li>
+               <%= link_to 'Create Role', new_user_path %>
+              </li>
+            <% else %>
+              <%= yield :action_show_user %>
+            <% end %>
+            <%= yield :goal %>
+            <%= yield :comment %>
+            <%= yield :delete_select_user %>
+
         <% else %>
            <li><%= link_to 'Sign Up', new_member_registration_path %></li>
         <% end %>
@@ -52,12 +57,19 @@
        <% if notice %>
           <div class="alert alert-info  alert-dismissable fade in">
             <%= notice %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"><i class="material-icons white">X</i></span>
+            </button>
+
           </div>
        <% end %>
 
        <% if alert %>
           <div class="alert alert-danger  alert-dismissable fade in">
             <%= alert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true"><i class="material-icons white">X</i></span>
+          </button>
           </div>
        <% end %>
 

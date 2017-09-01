@@ -1,9 +1,13 @@
-<% content_for :delete_select_user do %>
-  <li><%= link_to 'Delect Select Users',  destroy_select_user_path( :confirm => false), :onclick => "document.getElementById('select_user').submit();".html_safe,:method => :delete%>
-<% end %>
 
-<% content_for :button_here do %>
-  <%= submit_tag 'Select for Delete', :class => "btn btn-warning", style: 'text-align: center'%>
+<% if current_member.user.role != 'e'%>
+  <% content_for :button_here do %>
+    <%= submit_tag 'Select for Delete', :class => "btn btn-warning", style: 'text-align: center'%>
+  <% end %>
+
+  <% content_for :need_delete do %>
+    <%= link_to 'Delete', user_path(current_member.user.id), method: :delete, data: {confirm: "Are you sure? User is delete then no goals and comments will be aviable"}%>
+  <% end %>
+  
 <% end %>
 
 <script type="text/javascript">
@@ -16,7 +20,9 @@ $( document ).ready(function() {
 <%= form_tag '/destroy_select_user' , :method => :delete, :id => 'select_user'  do %>
 
 <% if @users.count > 5 %>
+
   <%= yield :button_here %>
+
 <% end %>
 
 <table class='table'>
@@ -73,8 +79,8 @@ $( document ).ready(function() {
       </td>
       <td><%= link_to 'Show', user_path(f) %></td>
       <td><%= link_to 'Edit', edit_user_path(f) %></td>
-      <td><%= link_to 'Delete', user_path(f), method: :delete, data: {confirm: "Are you sure? User is delete then no goals and comments will be aviable"}%></td>
       <td><%= link_to 'Create Goal', new_user_goal_path(f) %></td>
+      <td><%= yield :need_delete %></td>
 
     </tr>
   <% end %>
