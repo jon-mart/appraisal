@@ -7,11 +7,11 @@
 
 <% if @user.role == 'm'%>
   
-  <h1> List of Engineers </h1>
+  <h1 style="text-align: center;"> List of Engineers [Count: <span class="badge"> <%= @user.engineers.count%> </span>]</h1>
   <%= render :partial => '/layouts/me', locals: { person: @user.engineers, avatar: @user.avatar }%>
 <% elsif @user.role == 'sm' %>
 
-  <h1> List of Managers </h1>
+  <h1 style="text-align: center;" > List of Managers [Count: <span class="badge"> <%= @user.managers.count%> </span>]  </h1>
   <%= render :partial => 'layouts/me', locals: { person: @user.managers, avatar: @user.avatar }%>
 <% elsif @user.role == 'e' %>
 
